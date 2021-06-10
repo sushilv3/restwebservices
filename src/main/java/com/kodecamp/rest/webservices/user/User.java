@@ -2,12 +2,19 @@ package com.kodecamp.rest.webservices.user;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.BatchSize;
+
 public class User {
 
 	private Integer id;
 	
+	@Size(min=2, message = "Name Should have Atleast 2 Characters")
 	private String name;
 	
+	@Past
 	private Date birthdate;
 
 	public User(Integer id, String name, Date birthdate) {
