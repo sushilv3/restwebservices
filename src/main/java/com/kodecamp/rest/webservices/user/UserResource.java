@@ -1,9 +1,14 @@
 package com.kodecamp.rest.webservices.user;
 
+import java.util.Iterator;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,10 +42,20 @@ public class UserResource {
 		return user;
 	}
 
+//	delete user by id
+	@DeleteMapping("/users/{id}")
+	public void deleteUserById(@PathVariable int id) {
+		User user = userDaoService.deleteById(id);
+		if(user == null) {
+			throw new UserNotFoundException("User Doesn't exist with this id  - "+id);
+		}
+	}
+	
+	
 	// created
 	// details of hte user output - created & return the created URI
 	@PostMapping("/users")
-	public ResponseEntity<Object> createdUser(@RequestBody User user) {
+	public ResponseEntity<Object> createdUser(@Valid @RequestBody User user) {
 		
 		User savedUser = userDaoService.save(user);
 		
@@ -48,5 +63,7 @@ public class UserResource {
 		return ResponseEntity.created(location).build();
 		
 	}
+	
+	
 
 }
