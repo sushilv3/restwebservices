@@ -7,14 +7,21 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.BatchSize;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "All details about the user. ")
 public class User {
 
 	private Integer id;
 	
+	@ApiModelProperty(notes="Name should have atleast 2 characters")
 	@Size(min=2, message = "Name Should have Atleast 2 Characters")
 	private String name;
 	
+	
 	@Past
+	@ApiModelProperty(notes="Birth date should be in the past")
 	private Date birthdate;
 
 	public User(Integer id, String name, Date birthdate) {
