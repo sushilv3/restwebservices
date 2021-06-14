@@ -10,11 +10,14 @@ public class SomeBean {
 	@JsonIgnore
 	private String field3;
 
+
+	
 	public SomeBean(String field1, String field2, String field3) {
 		super();
 		this.field1 = field1;
 		this.field2 = field2;
 		this.field3 = field3;
+	
 	}
 
 	public String getField1() {
@@ -40,5 +43,6 @@ public class SomeBean {
 	public void setField3(String field3) {
 		this.field3 = field3;
 	}
+	
 
 }
